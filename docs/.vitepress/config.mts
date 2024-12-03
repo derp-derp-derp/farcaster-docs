@@ -1,22 +1,16 @@
-import { defineConfig } from 'vitepress';
+import { HeadConfig, defineConfig } from 'vitepress';
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: 'Farcaster',
-  description: 'Protocol homepage',
+  title: 'Farcaster Docs',
+  titleTemplate: ':title / Farcaster Docs',
+  description: 'Documentation for the Farcaster protocol',
   head: [
     ['link', { rel: 'icon', type: 'image/png', href: '/icon.png' }],
     ['meta', { property: 'og:type', content: 'website' }],
     [
       'meta',
-      {
-        property: 'og:title',
-        content: 'Farcaster',
-      },
-    ],
-    [
-      'meta',
-      { property: 'og:image', content: 'https://farcaster.xyz/og-image.png' },
+      { property: 'og:image', content: '/og-image.png' },
     ],
     ['meta', { property: 'og:url', content: 'https://farcaster.xyz' }],
     [
@@ -41,29 +35,50 @@ export default defineConfig({
       gtag('config', 'G-DF7PJS3WBD');`
     ],
   ],
+  transformHead(context) {
+    const extras: HeadConfig[] = [
+      [
+        'meta',
+        {
+          name: 'og:title',
+          content: context.pageData.frontmatter.layout === 'home' ? `Farcaster Docs`: `${context.pageData.title} / Farcaster Docs`
+        }
+      ]
+    ];
+
+    if (context.pageData.description !== '') {
+      extras.push(
+        [
+          'meta',
+          {
+            name: 'og:description',
+            content: context.pageData.description
+          }
+        ]
+      );
+    }
+
+    return extras;
+  },
   cleanUrls: true,
   themeConfig: {
     nav: [
       {
         text: 'Learn',
-        link: '/',
-        activeMatch: '/learn/',
+        link: '/learn/',
       },
       {
         text: 'Developers',
-        link: '/developers/index',
-        activeMatch: '/developers/',
+        link: '/developers/',
       },
       {
         text: 'AuthKit',
-        link: '/auth-kit/introduction',
-        activeMatch: '/auth-kit/',
+        link: '/auth-kit/',
       },
       { text: 'Hubble', link: '/hubble/hubble', activeMatch: '/hubble/' },
       {
         text: 'Reference',
-        link: '/reference/index',
-        activeMatch: '/reference/',
+        link: '/reference/',
       },
     ],
     search: {
@@ -76,13 +91,13 @@ export default defineConfig({
       }
     },
     sidebar: {
-      '/': [
+      '/learn/': [
         {
           text: 'Introduction',
           items: [
             {
               text: 'Getting Started',
-              link: '/index',
+              link: '/learn/',
             },
           ],
         },
@@ -103,7 +118,7 @@ export default defineConfig({
             },
             {
               text: 'Frames',
-              link: '/learn/what-is-farcaster/frames',
+              link: '/developers/frames/',
             },
             {
               text: 'Channels',
@@ -134,37 +149,57 @@ export default defineConfig({
         },
       ],
       '/developers/': [
+        { text: 'Overview', link: '/developers/' },
+        { text: 'Resources', link: '/developers/resources' },
         {
-          text: 'Introduction',
+          text: 'Frames',
           items: [
-            { text: 'Overview', link: '/developers/index' },
-            { text: 'Resources', link: '/developers/resources' },
-          ],
+            {
+              text: 'Introduction',
+              link: '/developers/frames/',
+            },
+            {
+              text: 'Getting Started',
+              link: '/developers/frames/getting-started',
+            },
+            {
+              text: 'Specification',
+              link: '/developers/frames/spec',
+            },
+            {
+              text: 'Best Practices',
+              link: '/developers/frames/best-practices',
+            },
+            {
+              text: 'Advanced',
+              link: '/developers/frames/advanced',
+            },
+            {
+              text: 'Resources',
+              link: '/developers/frames/resources',
+            },
+            {
+              text: 'App Frames',
+              link: '/developers/frames/app-frames',
+            },
+          ]
         },
         {
-          text: 'Guides',
+          text: 'Sign In with Farcaster',
           items: [
             {
-              text: 'Basics',
-              collapsed: true,
-              items: [
-                {
-                  text: 'Hello World',
-                  link: '/developers/guides/basics/hello-world',
-                },
-              ],
+              text: 'Introduction',
+              link: '/developers/siwf/',
             },
-
             {
-              text: 'Creating frames',
-              collapsed: true,
-              items: [
-                {
-                  text: 'Create a poll frame',
-                  link: '/developers/guides/frames/poll',
-                },
-              ],
+              text: 'AuthKit',
+              link: '/auth-kit/',
             },
+          ]
+        },
+        {
+          text: 'Farcaster Protocol',
+          items: [
             {
               text: 'Managing accounts',
               collapsed: true,
@@ -218,6 +253,10 @@ export default defineConfig({
               collapsed: true,
               items: [
                 {
+                  text: 'Create an account',
+                  link: '/developers/guides/accounts/create-account',
+                },
+                {
                   text: 'Create messages',
                   link: '/developers/guides/writing/messages',
                 },
@@ -270,17 +309,26 @@ export default defineConfig({
             },
           ],
         },
+        {
+          text: 'Third party services',
+          items: [
+            {
+              text: 'Neynar',
+              link: '/reference/third-party/neynar/index',
+            }
+          ]
+        }
       ],
       '/auth-kit/': [
         {
           text: 'Overview',
-          items: [{ text: 'Introduction', link: '/auth-kit/introduction' },{
+          items: [{ text: 'Introduction', link: '/auth-kit/' },{
             text: 'Examples',
             link: '/auth-kit/examples',
           },],
         },
         {
-          text: 'Getting Started',
+          text: 'Quickstart',
           items: [
             { text: 'Installation', link: '/auth-kit/installation' },
             { text: 'SignIn Button', link: '/auth-kit/sign-in-button' },
@@ -398,7 +446,7 @@ export default defineConfig({
         {
           text: 'Frames',
           items: [
-            { text: 'Specification', link: '/reference/frames/spec' },
+            { text: 'Specification', link: '/developers/frames/spec' },
           ],
         },
         {
@@ -411,8 +459,11 @@ export default defineConfig({
           text: 'Warpcast',
           items: [
             { text: 'APIs', link: '/reference/warpcast/api' },
-            { text: 'Cast Intents', link: '/reference/warpcast/cast-composer-intents' },
+            { text: 'Signer Requests', link: '/reference/warpcast/signer-requests' },
+            { text: 'Intent URLs', link: '/reference/warpcast/cast-composer-intents' },
+            { text: 'Direct Casts', link: '/reference/warpcast/direct-casts' },
             { text: 'Embeds', link: '/reference/warpcast/embeds' },
+            { text: 'Videos', link: '/reference/warpcast/videos' },
           ],
         },
         {
@@ -590,23 +641,30 @@ export default defineConfig({
             // },
           ],
         },
-        // {
-        //   text: 'Protocol Specification',
-        //   collapsed: true,
-        //   items: [
-        //     { text: 'Overview', link: '/reference/protocol/overview' },
-        //     {
-        //       text: 'Specification',
-        //       link: '/reference/protocol/specification',
-        //     },
-        //   ],
-        // },
+        {
+          text: 'Third party services',
+          items: [
+            {
+              text: 'Neynar',
+              link: '/reference/third-party/neynar/index',
+            },
+          ],
+        }
       ],
     },
     socialLinks: [
+      { 
+        icon: {
+          svg: '<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.11841 1H19.5982V4.09052H24L23.0775 7.18179H22.2964V19.6873C22.6881 19.6873 23.0061 20.0012 23.0061 20.3892V21.2321H23.1481C23.5406 21.2321 23.8587 21.5468 23.8587 21.9348V22.7778H15.9053V21.9348C15.9053 21.5468 16.2233 21.2321 16.6157 21.2321H16.7578V20.3892C16.7578 20.0519 16.9984 19.7702 17.3187 19.7024L17.3037 12.8021C17.0526 10.0451 14.7107 7.88443 11.8583 7.88443C9.00593 7.88443 6.66403 10.0451 6.41293 12.8021L6.3979 19.6963C6.7768 19.7521 7.24293 20.0412 7.24293 20.3892V21.2321H7.38502C7.77671 21.2321 8.09473 21.5468 8.09473 21.9348V22.7778H0.142092V21.9348C0.142092 21.5468 0.460107 21.2321 0.8518 21.2321H0.993892V20.3892C0.993892 20.0012 1.31191 19.6873 1.70436 19.6873V7.18179H0.923221L0 4.09052H4.11841V1Z" /></svg>',
+        },
+        link: 'https://warpcast.com/~/channel/fc-devs' 
+      },
       { icon: 'github', link: 'https://github.com/farcasterxyz/protocol' },
       { icon: 'twitter', link: 'https://twitter.com/farcaster_xyz' },
       { icon: 'youtube', link: 'https://www.youtube.com/@farcasterxyz' },
     ],
   },
+  vite: {
+    assetsInclude: ['**/*.avifs'],
+  }
 });

@@ -1,3 +1,20 @@
 {
-  "cleanUrls": true
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/auth-kit/introduction",
+      "destination": "/auth-kit/",
+      "permanent": true
+    },
+    {
+      "source": "/learn/what-is-farcaster/frames",
+      "destination": "/developers/frames/",
+      "permanent": true
+    },
+    {
+      "source": "/reference/frames/spec",
+      "destination": "/developers/frames/spec",
+      "permanent": true
+    }
+  ]
 }

@@ -13,7 +13,7 @@ To get involved, try looking up open issues in one of the repos below or join a 
 | [Contracts](https://github.com/farcasterxyz/contracts)           | The canonical Farcaster contracts            |
 | [Hubble](https://github.com/farcasterxyz/hub-monorepo)           | A Farcaster Hub written in Rust + Typescript |
 | [FName Registry](https://github.com/farcasterxyz/fname-registry) | The canonical server to register fnames      |
-| [Docs](https://github.com/farcasterxyz/www)                      | Documentation for all the above (this site)  |
+| [Docs](https://github.com/farcasterxyz/docs)                     | Documentation for all the above (this site)  |
 
 ## Documentation
 
@@ -29,7 +29,3 @@ great way to get involved.
   Calendar invite to join upcoming calls.
 - [Recordings](https://www.youtube.com/watch?v=lmGXWP5m1_Y&list=PL0eq1PLf6eUeZnPtyKMS6uN9I5iRIlnvq) - watch recordings
   of previous calls.
-
-## Community
-
-- [Developer Telegram](https://t.me/farcasterdevchat) - Public chat for developer support.

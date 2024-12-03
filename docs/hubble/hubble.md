@@ -14,7 +14,7 @@ network.
 Hubble instances can also be hosted for you by other service providers.
 
 - [Hubs x Neynar](https://hubs.neynar.com/)
-- [Hubs X Pinata](https://pinata.cloud/pinata-hub)
+- [Hubs x Pinata](https://pinata.cloud/pinata-hub)
 
 ## Public Instances
 
@@ -22,7 +22,7 @@ The Farcaster team runs an instance of Hubble for use by the public. This isn't 
 read-only for now.
 
 ```bash
-url: nemes.farcaster.xyz
+url: hoyt.farcaster.xyz
 httpapi_port: 2281
 gossipsub_port: 2282
 grpc_port: 2283
